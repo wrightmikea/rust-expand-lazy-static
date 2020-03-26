@@ -1,0 +1,108 @@
+#![feature(prelude_import)]
+#[prelude_import]
+use std::prelude::v1::*;
+#[macro_use]
+extern crate std;
+#[macro_use]
+extern crate lazy_static;
+use std::env;
+#[allow(missing_copy_implementations)]
+#[allow(non_camel_case_types)]
+#[allow(dead_code)]
+struct DEBUG {
+    __private_field: (),
+}
+#[doc(hidden)]
+static DEBUG: DEBUG = DEBUG {
+    __private_field: (),
+};
+impl ::lazy_static::__Deref for DEBUG {
+    type Target = bool;
+    fn deref(&self) -> &bool {
+        #[inline(always)]
+        fn __static_ref_initialize() -> bool {
+            env::args().any(|s| s.starts_with("-d"))
+        }
+        #[inline(always)]
+        fn __stability() -> &'static bool {
+            static LAZY: ::lazy_static::lazy::Lazy<bool> = ::lazy_static::lazy::Lazy::INIT;
+            LAZY.get(__static_ref_initialize)
+        }
+        __stability()
+    }
+}
+impl ::lazy_static::LazyStatic for DEBUG {
+    fn initialize(lazy: &Self) {
+        let _ = &**lazy;
+    }
+}
+fn main() {
+    {
+        ::std::io::_print(::core::fmt::Arguments::new_v1(
+            &["hello rust-expand-lazy-static!\n"],
+            &match () {
+                () => [],
+            },
+        ));
+    };
+    match *DEBUG {
+        tmp => {
+            {
+                ::std::io::_eprint(::core::fmt::Arguments::new_v1_formatted(
+                    &["[", ":", "] ", " = ", "\n"],
+                    &match (&"src/main.rs", &13u32, &"*DEBUG", &&tmp) {
+                        (arg0, arg1, arg2, arg3) => [
+                            ::core::fmt::ArgumentV1::new(arg0, ::core::fmt::Display::fmt),
+                            ::core::fmt::ArgumentV1::new(arg1, ::core::fmt::Display::fmt),
+                            ::core::fmt::ArgumentV1::new(arg2, ::core::fmt::Display::fmt),
+                            ::core::fmt::ArgumentV1::new(arg3, ::core::fmt::Debug::fmt),
+                        ],
+                    },
+                    &[
+                        ::core::fmt::rt::v1::Argument {
+                            position: 0usize,
+                            format: ::core::fmt::rt::v1::FormatSpec {
+                                fill: ' ',
+                                align: ::core::fmt::rt::v1::Alignment::Unknown,
+                                flags: 0u32,
+                                precision: ::core::fmt::rt::v1::Count::Implied,
+                                width: ::core::fmt::rt::v1::Count::Implied,
+                            },
+                        },
+                        ::core::fmt::rt::v1::Argument {
+                            position: 1usize,
+                            format: ::core::fmt::rt::v1::FormatSpec {
+                                fill: ' ',
+                                align: ::core::fmt::rt::v1::Alignment::Unknown,
+                                flags: 0u32,
+                                precision: ::core::fmt::rt::v1::Count::Implied,
+                                width: ::core::fmt::rt::v1::Count::Implied,
+                            },
+                        },
+                        ::core::fmt::rt::v1::Argument {
+                            position: 2usize,
+                            format: ::core::fmt::rt::v1::FormatSpec {
+                                fill: ' ',
+                                align: ::core::fmt::rt::v1::Alignment::Unknown,
+                                flags: 0u32,
+                                precision: ::core::fmt::rt::v1::Count::Implied,
+                                width: ::core::fmt::rt::v1::Count::Implied,
+                            },
+                        },
+                        ::core::fmt::rt::v1::Argument {
+                            position: 3usize,
+                            format: ::core::fmt::rt::v1::FormatSpec {
+                                fill: ' ',
+                                align: ::core::fmt::rt::v1::Alignment::Unknown,
+                                flags: 4u32,
+                                precision: ::core::fmt::rt::v1::Count::Implied,
+                                width: ::core::fmt::rt::v1::Count::Implied,
+                            },
+                        },
+                    ],
+                ));
+            };
+            tmp
+        }
+    };
+}
